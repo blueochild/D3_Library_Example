@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D3</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <svg width="500px" height="500px">
+        <g>
+            <!-- 원 -->
+            <circle cy="50" cx="50" r="30"></circle>
+            <circle cy="150" cx="150" r="30"></circle>
+            <circle cy="250" cx="250" r="30"></circle>
+            <circle cy="350" cx="350" r="30"></circle>
+
+        </g>
+    </svg>
+
+    <svg width="500px" height="500px">
+        <g>
+            <!-- 사각형 -->
+            <rect x="50" y="50" width="100" height="100" 
+                style="
+                fill:chocolate; 
+                stroke: black; 
+                stroke-width:10px;">
+            </rect>
+            <rect x="200" y="50" width="50" height="50" 
+                style="
+                fill:chocolate; 
+                stroke: black;">
+            </rect>
+        </g>        
+    </svg>
+
+    <svg width="500px" height="500px">
+        <g>
+            <!-- 점 찍고 이어서 안에 채우기 -->
+            <path d="M 100,300 100,350 200,300 200,350"
+                style="
+                fill:blank;">
+            </path>
+
+            <path d="M 300,300 300,350 350,350 350,300"
+                style="
+                fill:blank;">
+            </path>
+        </g>        
+    </svg>
+    
+    <svg width="500px" height="500px">
+        <g>
+            <!-- 텍스트 -->
+            <text x="400" y="400">Hello World!</text>
+        </g>        
+    </svg>
+
+    <div class="canvas">
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.js" integrity="sha512-NmSTfudjn1FCaFMQ+f4xveBmwRJn5ep8Wu+YOeq+CeExhFtKvwhfKVXFX3tGxoGWxu8Fl83qm9nE8/Hkc1dWZg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        const canvas = d3.select(".canvas");
+
+        const svg = canvas.append("svg")
+            .attr("height", 1000)
+            .attr("width", 1000);
+
+        // 텍스트
+        svg.append("text")
+            .attr("x", 200)
+            .attr("y", 200)
+            .text("하이네!")
+            .style("font-weight", "bold")
+            .style("font-size", "34px")
+            .style("font-family", "Gaegu");
+
+        // 사각형
+        svg.append("rect")
+            .attr("x", 200)
+            .attr("y", 250)
+            .attr("width", 100)
+            .attr("height", 100)
+            .attr("fill", "skyblue")
+            
+        // 원
+        svg.append("circle")
+            .attr("r", 50)
+            .attr("cx", 400)
+            .attr("cy", 300)
+            .attr("width", 100)
+            .attr("height", 100)
+            .attr("fill", "pink")
+
+        // 선
+        svg.append("line")
+            .attr("x1", 500)
+            .attr("y1", 500)
+            .attr("x2", 300)
+            .attr("y2", 300)
+            .attr("stroke", "red")
+
+    </script>
+
+</body>
+</html>
