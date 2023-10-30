@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D3</title>
+
+</head>
+<body>
+    <div class="canvas">
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.js" integrity="sha512-NmSTfudjn1FCaFMQ+f4xveBmwRJn5ep8Wu+YOeq+CeExhFtKvwhfKVXFX3tGxoGWxu8Fl83qm9nE8/Hkc1dWZg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        const canvas = d3.select(".canvas");
+        
+        const nodes = [
+            { x: 100, y: 100, name: "ye" },
+            { x: 200, y: 300, name: "jun" },
+            { x: 300, y: 200, name: "mi" },
+            { x: 200, y: 400, name: "sung" },
+        ]
+
+        const links = [
+            { source: "ye", target: "jun" },
+            { source: "jun", target: "mi" },
+            { source: "mi", target: "sung" },
+            { source: "sung", target: "jun" },
+        ]
+
+        const links_map = links.map(link => ({
+            source: nodes[nodes.findIndex(node => link.source == node.name)],
+            target: nodes[nodes.findIndex(node => link.target == node.name)]
+        }))
+
+        const svg = canvas.append("svg")
+            .attr("height", 1000)
+            .attr("width", 1000);
+
+        svg.selectAll("circle")
+            .data(nodes)
+            .join("circle")
+                .attr("fill", "red")
+                .attr("stroke", "black")
+                .attr("r", 5)
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y)
+        
+        svg.selectAll("line")
+            .data(links_map)
+            .join("line")
+                .attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y)
+                .attr("stroke", "red")
+                
+    </script>
+
+</body>
+</html>
