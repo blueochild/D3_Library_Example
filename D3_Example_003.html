@@ -130,6 +130,7 @@
 
 					//circle 노드에서 g 노드로 변경
 					node.attr("transform", function(d) { return "translate("+d.x+","+ d.y+")"; });
+					console.log("test")
 				});
 
 				//invalidation.then(() => simulation.stop());
@@ -137,21 +138,25 @@
 				return svg.node();
 			},
 			drag : function(simulation){
-				function dragstarted(d) {
-					if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+				function dragstarted(event, d) {
+					if (!d3.active) simulation.alphaTarget(0.3).restart();
 					d.fx = d.x;
 					d.fy = d.y;
+                    // console.log(`start Drag! ${d.x} ${d.y}`);
 				}
 
-				function dragged(d) {
-					d.fx = d3.event.x;
-					d.fy = d3.event.y;
+				function dragged(event, d) {
+					d.fx = event.x;
+					d.fy = event.y;
+
+                    // console.log(`Drag! ${event.x} ${event.y}`);
 				}
 
-				function dragended(d) {
-					if (!d3.event.active) simulation.alphaTarget(0);
+				function dragended(event, d) {
+					if (!d3.active) simulation.alphaTarget(0.3).restart();
 					d.fx = null;
 					d.fy = null;
+                    // console.log("end Drag!");
 				}
 
 				return d3.drag()
